@@ -18,13 +18,16 @@ import {
     SAH
 } from 'https://unpkg.com/three-mesh-bvh@0.5.10/build/index.module.js';
 import { GUI } from 'https://unpkg.com/three@0.138.0/examples/jsm/libs/lil-gui.module.min.js';
+import {makeDiamond as makeDiamond2} from './make-diamond.js';
+
+
 async function main() {
     // Setup basic renderer, controls, and profiler
     const clientWidth = window.innerWidth * 0.99;
     const clientHeight = window.innerHeight * 0.98;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, clientWidth / clientHeight, 0.1, 1000);
-    camera.position.set(50, 75, 50);
+    camera.position.set(25, 20, 25);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(clientWidth, clientHeight);
     document.body.appendChild(renderer.domElement);
@@ -301,7 +304,7 @@ async function main() {
                 }
             }
         }*/
-    const diamond = makeDiamond(diamondGeo);
+    const diamond = makeDiamond2(diamondGeo);
     scene.add(diamond);
     // Build postprocessing stack
     // Render Targets
@@ -335,7 +338,7 @@ async function main() {
         diamond.material.uniforms.bounces.value = effectController.bounces;
         diamond.material.uniforms.ior.value = effectController.ior;
         diamond.material.uniforms.correctMips.value = effectController.correctMips;
-        diamond.material.uniforms.chromaticAberration.value = effectController.chromaticAberration;
+        // diamond.material.uniforms.chromaticAberration.value = effectController.chromaticAberration;
         diamond.material.uniforms.aberrationStrength.value = effectController.aberrationStrength;
         diamond.rotation.y += 0.01;
         diamond.updateMatrix();
